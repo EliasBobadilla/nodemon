@@ -2,10 +2,9 @@
 
 const superTest = require('supertest')
 const chai = require('chai')
-const createServer = require('../index')
+const app = require('../index')
 const { expect } = chai
 
-const app = createServer()
 const localhost = superTest(app)
 
 describe('Search pokemon by name', () => {
@@ -17,7 +16,7 @@ describe('Search pokemon by name', () => {
     expect(response.status).to.equal(200)
     expect(response.body).to.be.an('array')
     expect(response.body).to.have.lengthOf(1)
-    expect(response.body[0], `Is ${pokemon}?`).to.have.property('name', pokemon)
+    expect(response.body[0]).to.have.property('name', pokemon)
   })
 })
 
@@ -59,6 +58,5 @@ describe('Delete a Pokemon', () => {
     expect(response.status).to.equal(200)
     // eslint-disable-next-line no-unused-expressions
     expect(response.body, 'Pokemon was deleted').to.be.true
-    app.close()
   })
 })
