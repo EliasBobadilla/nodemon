@@ -50,16 +50,16 @@ curl http://localhost:3000/v1/?name=charizard
 curl -X POST http://localhost:3000/v1/upsert \
    -H 'Content-Type: application/json' \
    -d '{
-  "number": 1000,
-  "name": "Mega Metapod Test",
+  "number": 5,
+  "name": "Mega Metapod",
   "type1": "Bug",
-  "total": 1000,
-  "hp": 1000,
-  "attack": 1000,
-  "defense": 1000,
-  "spAtk": 1000,
-  "spDef": 1000,
-  "speed": 1000,
+  "total": 15,
+  "hp": 25,
+  "attack": 35,
+  "defense": 45,
+  "spAtk": 55,
+  "spDef": 65,
+  "speed": 75,
   "generation": 1,
   "legendary": false
 }'
