@@ -99,6 +99,12 @@ curl -X DELETE http://localhost:3000/v1/?id=7
 npm test
 ```
 
+## Demo
+Also, you can try it in: https://z61b211da-zbf3a95a1-gtw.qovery.io, for example:
+- https://z61b211da-zbf3a95a1-gtw.qovery.io/v1
+- https://z61b211da-zbf3a95a1-gtw.qovery.io/v1?name=pika
+
+
 
 ## License
 
