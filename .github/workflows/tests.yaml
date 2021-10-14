@@ -1,21 +1,19 @@
 name: Tests
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node: [ '14', '16' ]
-    name: Node ${{ matrix.node }} sample
+    name: Node ${{ matrix.node }}s
     steps:
-      - uses: workflows/checkout@v2
+      - uses: actions/checkout@v2
       - name: Setup node
-        uses: workflows/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
-      - run: npm tes
+      - run: npm test
