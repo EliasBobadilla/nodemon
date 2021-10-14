@@ -1,5 +1,5 @@
 require('dotenv').config()
-const path = require('path')
+const path = require('node:path')
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
