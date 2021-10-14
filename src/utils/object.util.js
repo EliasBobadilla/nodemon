@@ -14,13 +14,26 @@ function toDto (props) {
 
 function toModel (payload) {
   const model = buildModel(payload)
-  let cols = ''
+  const cols = []
   const values = []
   Object.entries(model).forEach(([key, value]) => {
-    cols += cols ? `,${key}` : key
+    cols.push(key)
     values.push(value)
   })
   return { cols, values }
 }
 
-module.exports = { toDto, toModel }
+function toUpdateModel (payload) {
+  const model = buildModel(payload)
+  const cols = []
+  const values = []
+  Object.entries(model).forEach(([key, value]) => {
+    if (key !== 'id') {
+      cols.push(key)
+      values.push(value)
+    }
+  })
+  return { cols, values }
+}
+
+module.exports = { toDto, toModel, toUpdateModel }

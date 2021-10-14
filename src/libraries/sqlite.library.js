@@ -27,7 +27,6 @@ class SqliteLibrary {
     return new Promise((resolve, reject) => {
       db.run(query, values, (err) => {
         if (err) return reject(err)
-        console.log('====>', this.changes)
         return resolve(true)
       })
     })
