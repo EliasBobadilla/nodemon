@@ -36,8 +36,8 @@ app.use(wrapErrors)
 app.use(logErrors)
 app.use(errorHandler)
 
-app.listen(config.port, () =>
+const server = app.listen(config.port, () =>
   logger.info(`app is listening on port ${config.port}`)
 )
 
-module.exports = app
+module.exports = server

@@ -2,10 +2,10 @@
 
 const superTest = require('supertest')
 const chai = require('chai')
-const app = require('../index')
+const server = require('../index')
 const { expect } = chai
 
-const localhost = superTest(app)
+const localhost = superTest(server)
 
 describe('Search pokemon by name', () => {
   const pokemon = 'Metapod'
@@ -42,7 +42,7 @@ describe('Add new Pokemon', () => {
 
     expect(response.status).to.equal(200)
     // eslint-disable-next-line no-unused-expressions
-    expect(response.body, 'Pokemon was registered').to.be.true
+    expect(response.body).to.be.true
   })
 })
 
@@ -57,6 +57,8 @@ describe('Delete a Pokemon', () => {
 
     expect(response.status).to.equal(200)
     // eslint-disable-next-line no-unused-expressions
-    expect(response.body, 'Pokemon was deleted').to.be.true
+    expect(response.body).to.be.true
   })
 })
+
+server.close()
