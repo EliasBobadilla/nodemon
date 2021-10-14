@@ -23,4 +23,13 @@ const deleteSchema = joi.object({
   })
 })
 
-module.exports = { upsertSchema, deleteSchema }
+const pagedSchema = joi.object({
+  page: joi.number().positive().greater(0).required().messages({
+    'any.required': 'page is required'
+  }),
+  limit: joi.number().positive().greater(0).required().messages({
+    'any.required': 'limit is required'
+  })
+})
+
+module.exports = { upsertSchema, deleteSchema, pagedSchema }

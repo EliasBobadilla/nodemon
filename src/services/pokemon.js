@@ -32,6 +32,12 @@ class PokemonService {
     return this.db.run(query, [id])
   }
 
+  async paged (page, limit) {
+    const query = `SELECT * FROM ${TABLE} LIMIT ${limit} OFFSET ${(page - 1) * limit}`
+    const result = await this.db.where(query)
+    return result.map(item => toDto(item))
+  }
+
   async add (payload) {
     await this.validateIfExist(payload.name)
     const { cols, values } = toModel(payload)

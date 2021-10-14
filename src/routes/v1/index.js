@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const validationHandler = require('../../handlers/validationHandler')
 const PokemonService = require('../../services/pokemon')
-const { upsertSchema, deleteSchema } = require('../../schemas')
+const { upsertSchema, deleteSchema, pagedSchema } = require('../../schemas')
 
 const pokemonService = new PokemonService()
 const router = Router()
@@ -12,6 +12,19 @@ router.get(
     try {
       const { name } = req.query
       const response = name ? await pokemonService.getByName(name) : await pokemonService.all()
+      res.status(200).json(response)
+    } catch (error) {
+      next(error)
+    }
+  })
+
+router.get(
+  '/paged',
+  validationHandler(pagedSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const { page, limit } = req.query
+      const response = await pokemonService.paged(page, limit)
       res.status(200).json(response)
     } catch (error) {
       next(error)
