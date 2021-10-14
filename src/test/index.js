@@ -2,13 +2,15 @@
 
 const superTest = require('supertest')
 const chai = require('chai')
-const expect = chai.expect
+const createServer = require('../index')
+const { expect } = chai
 
-const localhost = superTest('http://localhost:3000')
+const app = createServer()
+const localhost = superTest(app)
 
 describe('Search pokemon by name', () => {
   const pokemon = 'Metapod'
-  it('Search pokemon by name', async () => {
+  it('Is a Metapod?', async () => {
     const response = await localhost
       .get(`/v1/?name=${pokemon}`)
 
@@ -19,11 +21,11 @@ describe('Search pokemon by name', () => {
   })
 })
 
-describe('Add Pokemon', () => {
+describe('Add new Pokemon', () => {
   const pokemon = {
     number: 1000,
-    name: 'Mega Metapod Test',
-    type1: 'Bug',
+    name: 'Mega PetalMD',
+    type1: 'Developer',
     total: 1000,
     hp: 1000,
     attack: 1000,
@@ -32,9 +34,9 @@ describe('Add Pokemon', () => {
     spDef: 1000,
     speed: 1000,
     generation: 1,
-    legendary: false
+    legendary: true
   }
-  it('Add Mega Metapod', async () => {
+  it('was Mega PetalMD registered?', async () => {
     const response = await localhost
       .post('/v1/upsert')
       .send(pokemon)
@@ -45,9 +47,9 @@ describe('Add Pokemon', () => {
   })
 })
 
-describe('Delete Pokemon', () => {
-  const pokemon = 'Mega Metapod Test'
-  it('Delete Mega Metapod', async () => {
+describe('Delete a Pokemon', () => {
+  const pokemon = 'PetalMD'
+  it('Was pokemon deleted?', async () => {
     const { body } = await localhost
       .get(`/v1/?name=${pokemon}`)
 
@@ -57,5 +59,6 @@ describe('Delete Pokemon', () => {
     expect(response.status).to.equal(200)
     // eslint-disable-next-line no-unused-expressions
     expect(response.body, 'Pokemon was deleted').to.be.true
+    app.close()
   })
 })

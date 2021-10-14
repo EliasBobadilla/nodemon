@@ -21,20 +21,29 @@ log.configure({
 
 const logger = log.getLogger('default')
 
-const app = express()
-app.use(log.connectLogger(logger, { level: 'info' }))
-app.use(cors())
-app.use(express.json())
+function createServer () {
+  const app = express()
 
-// Routes
-app.use('/v1', route)
-app.use(notFoundHandler)
+  app.use(log.connectLogger(logger, { level: 'info' }))
+  app.use(cors())
+  app.use(express.json())
 
-// Error handlers
-app.use(wrapErrors)
-app.use(logErrors)
-app.use(errorHandler)
+  // Routes
+  app.use('/v1', route)
+  app.use(notFoundHandler)
+
+  // Error handlers
+  app.use(wrapErrors)
+  app.use(logErrors)
+  app.use(errorHandler)
+
+  return app
+}
+
+const app = createServer()
 
 app.listen(config.port, () =>
   logger.info(`app is listening on port ${config.port}`)
 )
+
+module.exports = createServer
