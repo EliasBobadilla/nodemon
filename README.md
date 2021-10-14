@@ -1,12 +1,12 @@
 
 # Nodemon
+![](assets/mecha_sharizard.png)
+
 ![CodeQL](https://github.com/eliasbobadilla/nodemon/workflows/CodeQL/badge.svg) ![Tests](https://github.com/eliasbobadilla/nodemon/workflows/Tests/badge.svg)
-
-
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
-> A Pokémon API built with [Hapi](https://github.com/hapijs/hapi) on [Node.js](https://nodejs.org).
+> A Pokémon API built with [Express](https://github.com/expressjs/express) on [Node.js](https://nodejs.org).
 
 ## Deploy
 
@@ -65,12 +65,41 @@ curl -X POST http://localhost:3000/v1/upsert \
 }'
 ```
 
+- Update a Pokemon
+
+```bash
+curl -X POST http://localhost:3000/v1/upsert \
+   -H 'Content-Type: application/json' \
+   -d '{
+  "id": 7,
+  "number": 1000,
+  "name": "Mega PetalMD",
+  "type1": "Bug",
+  "total": 1000,
+  "hp": 1000,
+  "attack": 1000,
+  "defense": 1000,
+  "spAtk": 1000,
+  "spDef": 1000,
+  "speed": 1000,
+  "generation": 1,
+  "legendary": true
+}'
+```
+
 - Delete Pokemon
 
 ```bash
 curl -X DELETE http://localhost:3000/v1/?id=7
 ```
 
-### License
+## Test
+
+```bash
+npm test
+```
+
+
+## License
 
 This program is licensed under the [MIT License](./LICENSE.md).
